@@ -1,0 +1,127 @@
+---
+
+- name: fix hosts
+  command: sudo su -c "echo 127.0.0.1 `hostname` >> /etc/hosts" - root
+
+#- name: Install ethtool
+#  apt: pkg=ethtool update_cache=yes
+
+#- name: ethtool stuff
+#  command: ethtool --offload eth0 tso off
+
+- name: Set up authorized_keys for the ubuntu user
+  authorized_key: user="{{ sudouser }}"
+                  key="{{ item }}"
+  with_file:
+    - public_keys/hbarrett.key
+    - public_keys/bhudspeth.key
+    - public_keys/jerickson.key
+
+
+- name: Update packages 
+  apt: update_cache=yes
+
+- name: Install packages
+  apt: pkg=$item state=present
+  with_items:
+    - postgresql
+    - postgresql-9.3-postgis-2.1
+    - postgis
+    - postgresql-client-9.3
+    - postgresql-contrib-9.3
+    - build-essential
+    - libpq-dev
+    - postgresql-server-dev-9.3
+    - libxml2-dev
+    - libgeos-dev
+    - libproj-dev
+    - gdal-bin
+    - libgdal-dev
+    - bzip2
+    - gdal-bin
+    - ntp
+
+- name: Push pg_hba configuration
+  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf mode=0640 owner=postgres group=postgres
+- name: Push postgres configuration
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf mode=0644 owner=postgres group=postgres
+- name: restart postgres
+  service: name=postgresql state=restarted
+q
+# Copy files
+
+- copy: src=geos-3.3.9.tar.bz2 dest=/usr/local/src/geos-3.3.9.tar.bz2
+- command: bunzip2 /usr/local/src/geos-3.3.9.tar.bz2
+- command: tar xfv /usr/local/src/geos-3.3.9.tar -C /usr/local/src/
+- copy: src=postgis-2.1.1.tar.gz dest=/usr/local/src/postgis-2.1.1.tar.gz
+- command: tar zxfv /usr/local/src/postgis-2.1.1.tar.gz -C /usr/local/src/
+#- copy: src=gstore.sql dest=/usr/local/src/gstore.sql
+
+
+#
+#- lineinfile: dest=/etc/profile line="LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib ; export LD_LIBRARY_PATH"
+#- lineinfile: dest=/etc/apache2/envvars line="export LD_LIBRARY_PATH=:/usr/local/lib:/usr/include/libxml2"
+
+
+
+- name: Build geos
+  shell: $item chdir=/usr/local/src/geos-3.3.9
+  with_items:
+    - ./configure >> build.log
+    - make >> build.log
+    - make install >> build.log
+
+
+- name: Build postgis
+  shell: $item chdir=/usr/local/src/postgis-2.1.1
+  with_items:
+    - ./configure >> build.log
+    - make >> build.log
+    - make install >> build.log
+
+
+# setup db
+- name: Create gstore3 DB
+  command: su -c "createdb {{ gstoredbname }}" - postgres
+- name: Create dataone DB
+  command: su -c "createdb {{ dataonedbname }}" - postgres
+- name: postgis setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/postgis.sql" - postgres
+- name: postgis_comments setup 
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/postgis_comments.sql" - postgres
+- name: spatial_ref_sys setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/spatial_ref_sys.sql" - postgres
+- name: rtpostgis setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/rtpostgis.sql" - postgres
+- name: raster_comments setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/raster_comments.sql" - postgres
+- name: topology setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/topology/topology.sql" - postgres
+- name: topology_comments setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis_topology/sql_bits/topology_comments.sql" - postgres
+
+- name: Push inital gstore sql
+  template: src=gstore.sql.j2 dest=/usr/local/src/gstore.sql mode=0740 owner=postgres group=postgres
+
+- name: Push inital gstore structure
+  template: src=gstore.struct.sql.j2 dest=/usr/local/src/gstore.struct.sql mode=0740 owner=postgres group=postgres
+
+- name: Push inital dataone structure
+  template: src=dataone.struct.sql.j2 dest=/usr/local/src/dataone.struct.sql mode=0740 owner=postgres group=postgres
+
+- name: Push inital dataone structure
+  template: src=gstore.inserts.sql.j2 dest=/usr/local/src/gstore.inserts.sql mode=0740 owner=postgres group=postgres
+
+
+- name: create gstoredata schema and user
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/gstore.sql" - postgres
+
+- name: create gstore structure
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/gstore.struct.sql" - postgres
+
+- name: initial inserts        
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/gstore.inserts.sql" - postgres
+
+- name: create gstore structure
+  command: su -c "psql -d {{ dataonedbname }} -f /usr/local/src/dataone.struct.sql" - postgres
+

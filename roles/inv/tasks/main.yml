@@ -1,0 +1,7 @@
+---
+
+- name: inv
+  command: /bin/hostname
+
+
+

@@ -1,0 +1,59 @@
+---
+
+
+- name: Update packages 
+  apt: update_cache=yes
+
+- name: Create directories
+  command: mkdir -p /opt/mongodb /data/db /var/lib/mongodb /var/log/mongodb /opt/mongoparts
+
+- name: Copy mongodb-linux-x86_64-2.6.0.001
+  copy: src=mongodb-linux-x86_64-2.6.0.001 dest=/opt/mongoparts/mongodb-linux-x86_64-2.6.0.001
+- name: Copy mongodb-linux-x86_64-2.6.0.002
+  copy: src=mongodb-linux-x86_64-2.6.0.002 dest=/opt/mongoparts/mongodb-linux-x86_64-2.6.0.002
+
+- name: Assemble
+  shell: cat /opt/mongoparts/* >> /usr/local/src/mongodb-linux-x86_64-2.6.0.tgz
+
+- name: Copy /etc/mongodb.conf
+  copy: src=mongodb.conf dest=/etc/mongodb.conf
+- name: Copy /etc/init/mongodb.conf
+  copy: src=init.mongodb.conf dest=/etc/init/mongodb.conf
+- name: Push mongo gstore create script
+  template: src=gstore.js.j2 dest=/opt/gstore.js mode=0755 owner=root
+- name: Unzip mongodb-linux-x86_64-2.6.0.tgz
+  command: tar zxfv /usr/local/src/mongodb-linux-x86_64-2.6.0.tgz -C /usr/local/src/
+- name: Copy to opt
+  command: cp -a -R -n /usr/local/src/mongodb-linux-x86_64-2.6.0/bin /opt/mongodb/
+
+- name: Setup symlinks
+  file: src=/opt/mongodb/bin/{{ item }} dest=/usr/local/bin/{{ item }} state=link
+  with_items:
+    - bsondump
+    - mongo
+    - mongod
+    - mongodump
+    - mongoexport
+    - mongofiles
+    - mongoimport
+    - mongooplog
+    - mongoperf
+    - mongorestore
+    - mongos
+    - mongostat
+    - mongotop
+
+- name: Create mongodb
+  user: name=mongodb password={{ gstorepassword }} state=present
+- name: Change ownership of /data/db to mongo
+  command: chown mongodb /data/db
+- name: Change ownership of /var/lib/mongodb to mongo
+  command: chown mongodb /var/lib/mongodb
+- name: Change ownership of /var/log/mongodb to mongo
+  command: chown mongodb /var/log/mongodb
+- name: start mongodb
+  service: name=mongodb state=started
+- name: wait for mongo
+  wait_for: port=27017 delay=2
+- name: populate gstoredb
+  command: mongo {{ gstoredbname }} /opt/gstore.js

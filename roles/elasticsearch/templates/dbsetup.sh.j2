@@ -1,0 +1,326 @@
+#!/bin/bash
+
+curl -XPUT http://localhost:9200/gstore/
+
+curl -XPUT 'http://localhost:9200/gstore/dataset/_mapping' -d '
+{
+    "dataset": {
+        "properties": {
+            "abstract": {
+                "type": "string"
+            },
+            "active": {
+                "type": "boolean"
+            },
+            "aliases": {
+                "type": "string",
+                "index_name": "alias"
+            },
+            "applications": {
+                "type": "string",
+                "index_name": "application"
+            },
+            "area": {
+                "type": "double"
+            },
+            "available": {
+                "type": "boolean"
+            },
+            "category": {
+                "properties": {
+                    "apps": {
+                        "type": "string"
+                    },
+                    "groupname": {
+                        "type": "string"
+                    },
+                    "subtheme": {
+                        "type": "string"
+                    },
+                    "theme": {
+                        "type": "string"
+                    }
+                }
+            },
+            "category_facets": {
+                "type": "nested",
+                "properties": {
+                    "apps": {
+                        "type": "string"
+                    },
+                    "groupname": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "omit_norms": true,
+                        "index_options": "docs"
+                    },
+                    "subtheme": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "omit_norms": true,
+                        "index_options": "docs"
+                    },
+                    "theme": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "omit_norms": true,
+                        "index_options": "docs"
+                    }
+                }
+            },
+            "collections": {
+                "type": "string"
+            },
+            "date_added": {
+                "type": "date",
+                "format": "YYYY-MM-dd"
+            },
+            "date_published": {
+                "properties": {
+                    "date": {
+                        "type": "date",
+                        "format": "YYYY-MM-dd"
+                    },
+                    "day": {
+                        "type": "integer"
+                    },
+                    "month": {
+                        "type": "integer"
+                    },
+                    "year": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "externalapp" : {
+              "type" : "string",
+              "index" : "not_analyzed"
+            },
+            "externaluserid" : {
+              "type" : "string",
+              "index" : "not_analyzed"
+            },
+            "embargo": {
+                "type": "boolean"
+            },
+            "formats": {
+                "type": "string"
+            },
+            "geomtype": {
+                "type": "string"
+            },
+            "gstore_metadata": {
+                "properties": {
+                    "date": {
+                        "type": "date",
+                        "format": "YYYY-MM-dd"
+                    },
+                    "day": {
+                        "type": "integer"
+                    },
+                    "month": {
+                        "type": "integer"
+                    },
+                    "year": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "isotopic": {
+                "type": "string"
+            },
+            "keywords": {
+                "type": "string"
+            }
+        }
+    }
+}'
+
+curl -XPUT 'http://localhost:9200/gstore/dataset/_mapping' -d '
+{
+    "dataset": {
+        "properties": {
+            "location": {
+                "properties": {
+                    "bbox": {
+                        "type": "geo_shape",
+                        "tree": "quadtree",
+                        "tree_levels": 40
+                    },
+                    "counties": {
+                        "type": "string",
+                        "index_name": "county"
+                    },
+                    "quads": {
+                        "type": "string",
+                        "index_name": "quad"
+                    }
+                }
+            },
+            "repositories": {
+                "type": "string"
+            },
+            "services": {
+                "type": "string"
+            },
+            "standards": {
+                "type": "string",
+                "index": "not_analyzed",
+                "omit_norms": true,
+                "index_options": "docs"
+            },
+            "supported_repositories": {
+                "type": "nested",
+                "properties": {
+                    "app": {
+                        "type": "string"
+                    },
+                    "repos": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "omit_norms": true,
+                        "index_options": "docs"
+                    }
+                }
+            },
+            "taxonomy": {
+                "type": "string"
+            },
+            "title": {
+                "type": "string"
+            },
+            "title_search": {
+                "type": "string",
+                "index": "not_analyzed",
+                "omit_norms": true,
+                "index_options": "docs"
+            },
+            "valid_end": {
+                "properties": {
+                    "date": {
+                        "type": "date",
+                        "format": "YYYY-MM-dd"
+                    },
+                    "day": {
+                        "type": "integer"
+                    },
+                    "month": {
+                        "type": "integer"
+                    },
+                    "year": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "valid_start": {
+                "properties": {
+                    "date": {
+                        "type": "date",
+                        "format": "YYYY-MM-dd"
+                    },
+                    "day": {
+                        "type": "integer"
+                    },
+                    "month": {
+                        "type": "integer"
+                    },
+                    "year": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}'
+
+curl -XPUT 'http://localhost:9200/gstore/collection/_mapping' -d '
+{
+    "collection": {
+        "properties": {
+            "abstract": {
+                "type": "string"
+            },
+            "active": {
+                "type": "boolean"
+            },
+            "applications": {
+                "type": "string",
+                "index_name": "application"
+            },
+            "area": {
+                "type": "double"
+            },
+            "available": {
+                "type": "boolean"
+            },
+            "category": {
+                "properties": {
+                    "apps": {
+                        "type": "string"
+                    },
+                    "groupname": {
+                        "type": "string"
+                    },
+                    "subtheme": {
+                        "type": "string"
+                    },
+                    "theme": {
+                        "type": "string"
+                    }
+                }
+            },
+            "category_facets": {
+                "type": "nested",
+                "properties": {
+                    "apps": {
+                        "type": "string"
+                    },
+                    "groupname": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "omit_norms": true,
+                        "index_options": "docs"
+                    },
+                    "subtheme": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "omit_norms": true,
+                        "index_options": "docs"
+                    },
+                    "theme": {
+                        "type": "string",
+                        "index": "not_analyzed",
+                        "omit_norms": true,
+                        "index_options": "docs"
+                    }
+                }
+            },
+            "date_added": {
+                "type": "date",
+                "format": "YYYY-MM-dd"
+            },
+            "embargo": {
+                "type": "boolean"
+            },
+            "isotopic": {
+                "type": "string"
+            },
+            "location": {
+                "properties": {
+                    "bbox": {
+                        "type": "geo_shape",
+                        "tree": "quadtree",
+                        "tree_levels": 40
+                    }
+                }
+            },
+            "taxonomy": {
+                "type": "string"
+            },
+            "title": {
+                "type": "string"
+            }
+        }
+    }
+}'
+

@@ -1,0 +1,175 @@
+---
+
+- name: fix hosts
+  command: sudo su -c "echo 127.0.0.1 `hostname` >> /etc/hosts" - root
+
+- name: Update packages 
+  apt: update_cache=yes
+
+- name: Install the package "postgresql"
+  apt:
+    name: postgresql
+    state: present
+- name: Install the package "postgresql-9.3-postgis-2.1"
+  apt:
+    name: postgresql-9.3-postgis-2.1
+    state: present
+- name: Install the package "postgis"
+  apt:
+    name: postgis
+    state: present
+- name: Install the package "postgresql-client-9.3"
+  apt:
+    name: postgresql-client-9.3
+    state: present
+- name: Install the package "postgresql-contrib-9.3"
+  apt:
+    name: postgresql-contrib-9.3
+    state: present
+- name: Install the package "build-essential"
+  apt:
+    name: build-essential
+    state: present
+- name: Install the package "libpq-dev"
+  apt:
+    name: libpq-dev
+    state: present
+- name: Install the package "postgresql-server-dev-9.3"
+  apt:
+    name: postgresql-server-dev-9.3
+    state: present
+- name: Install the package "libxml2-dev"
+  apt:
+    name: libxml2-dev
+    state: present
+- name: Install the package "libgeos-dev"
+  apt:
+    name: libgeos-dev
+    state: present
+- name: Install the package "libproj-dev"
+  apt:
+    name: libproj-dev
+    state: present
+- name: Install the package "gdal-bin"
+  apt:
+    name: gdal-bin
+    state: present
+- name: Install the package "libgdal-dev"
+  apt:
+    name: libgdal-dev
+    state: present
+- name: Install the package "bzip2"
+  apt:
+    name: bzip2
+    state: present
+- name: Install the package "gdal-bin"
+  apt:
+    name: gdal-bin
+    state: present
+- name: Install the package "ntp"
+  apt:
+    name: ntp
+    state: present
+
+- name: Push pg_hba configuration
+  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf mode=0640 owner=postgres group=postgres
+- name: Push postgres configuration
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf mode=0644 owner=postgres group=postgres
+- name: restart postgres
+  service: name=postgresql state=restarted
+
+# Copy files
+
+- copy: src=geos-3.3.9.tar.bz2 dest=/usr/local/src/geos-3.3.9.tar.bz2
+- command: bunzip2 /usr/local/src/geos-3.3.9.tar.bz2
+- command: tar xfv /usr/local/src/geos-3.3.9.tar -C /usr/local/src/
+- copy: src=postgis-2.1.1.tar.gz dest=/usr/local/src/postgis-2.1.1.tar.gz
+- command: tar zxfv /usr/local/src/postgis-2.1.1.tar.gz -C /usr/local/src/
+
+
+
+- name: Build geos
+  shell: $item chdir=/usr/local/src/geos-3.3.9
+  with_items:
+    - ./configure >> build.log
+    - make >> build.log
+    - make install >> build.log
+
+
+- name: Build postgis
+  shell: $item chdir=/usr/local/src/postgis-2.1.1
+  with_items:
+    - ./configure >> build.log
+    - make >> build.log
+    - make install >> build.log
+
+
+# setup db
+- name: Create gstore3 DB
+  command: su -c "createdb {{ gstoredbname }}" - postgres
+- name: Create dataone DB
+  command: su -c "createdb {{ dataonedbname }}" - postgres
+
+
+
+
+- name: Check that the somefile.conf exists
+  stat:
+    path: /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/postgis.sql
+  register: stat_result
+
+
+
+#Run these if postgis.sql is found
+- name: postgis setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/postgis.sql" - postgres
+  when: stat_result.stat.exists == True 
+- name: postgis_comments setup 
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/postgis_comments.sql" - postgres
+  when: stat_result.stat.exists == True
+- name: spatial_ref_sys setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/spatial_ref_sys.sql" - postgres
+  when: stat_result.stat.exists == True
+- name: rtpostgis setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/rtpostgis.sql" - postgres
+  when: stat_result.stat.exists == True
+- name: raster_comments setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis/sql_bits/raster_comments.sql" - postgres
+  when: stat_result.stat.exists == True
+- name: topology setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/topology/topology.sql" - postgres
+  when: stat_result.stat.exists == True
+- name: topology_comments setup
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/postgis-2.1.1/extensions/postgis_topology/sql_bits/topology_comments.sql" - postgres
+  when: stat_result.stat.exists == True
+
+#Run this if it is not:
+- name: Install postgis NEW
+  command: su -c "psql -d {{ gstoredbname }} -c \"CREATE EXTENSION postgis;\"" - postgres
+
+
+- name: Push inital gstore sql
+  template: src=gstore.sql.j2 dest=/usr/local/src/gstore.sql mode=0740 owner=postgres group=postgres
+
+- name: Push inital gstore structure
+  template: src=gstore.struct.sql.j2 dest=/usr/local/src/gstore.struct.sql mode=0740 owner=postgres group=postgres
+
+- name: Push inital dataone structure
+  template: src=dataone.struct.sql.j2 dest=/usr/local/src/dataone.struct.sql mode=0740 owner=postgres group=postgres
+
+- name: Push inital dataone structure
+  template: src=gstore.inserts.sql.j2 dest=/usr/local/src/gstore.inserts.sql mode=0740 owner=postgres group=postgres
+
+
+- name: create gstoredata schema and user
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/gstore.sql" - postgres
+
+- name: create gstore structure
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/gstore.struct.sql" - postgres
+
+- name: initial inserts        
+  command: su -c "psql -d {{ gstoredbname }} -f /usr/local/src/gstore.inserts.sql" - postgres
+
+- name: create gstore structure
+  command: su -c "psql -d {{ dataonedbname }} -f /usr/local/src/dataone.struct.sql" - postgres
+

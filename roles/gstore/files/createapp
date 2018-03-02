@@ -1,0 +1,68 @@
+#!/bin/bash
+virtualenv --no-site-packages $myapp"_env"
+set -e
+
+checkuser=`whoami`
+if [ "$checkuser" = "root" ]
+then
+
+#echo "Hello, "$SUDO_USER".  This script will create a modwsgi virtual environment and allow it to be served in Apache"
+#echo -n "Enter the name of the app you wish to create and press [ENTER]: "
+myapp=gstore_v3
+if [ -d /opt/modwsgi/$myapp"_env" ];
+then
+echo -e "\033[31;5;148mSorry that app name \"$myapp\" is taken.\033[39m"
+else
+echo "Creating $myapp"
+echo createing $myapp"_env"
+
+cd /opt/modwsgi
+virtualenv --no-site-packages $myapp"_env"
+cd /opt/modwsgi/$myapp"_env"
+source bin/activate
+
+pip install --upgrade setuptools pip
+bin/easy_install pyramid==1.5.2
+bin/easy_install pytz
+bin/easy_install pymongo
+bin/easy_install tilecache
+bin/easy_install soaplib
+bin/easy_install psycopg2
+bin/easy_install django-hstore
+bin/easy_install gdal
+bin/easy_install Pillow
+bin/easy_install xlwt
+bin/easy_install rdflib
+bin/easy_install requests
+bin/easy_install sqlalchemy==0.7.8
+bin/easy_install paste
+
+#cd /usr/local/src/mapserver-6.4.1/
+#/opt/modwsgi/$myapp"_env"/bin/easy_install mapscript
+cp /usr/local/src/mapserver-6.4.1/build/mapscript/python/_mapscript.so /opt/modwsgi/gstore_v3_env/lib/python2.7/site-packages/
+cp /usr/local/src/mapserver-6.4.1/build/mapscript/python/mapscript.py /opt/modwsgi/gstore_v3_env/lib/python2.7/site-packages/
+cd /opt/modwsgi/$myapp"_env"/
+bin/pcreate -s alchemy $myapp
+cd $myapp
+../bin/python setup.py develop
+
+
+
+sed "s/myapp/$myapp/g" /opt/templates/pyramid.wsgi.template > /opt/modwsgi/$myapp"_env"/pyramid.wsgi
+sed "s/myapp/$myapp/g" /opt/templates/apache.template > /etc/apache2/sites-available/$myapp.conf
+chmod 755 /opt/modwsgi/$myapp"_env"/pyramid.wsgi
+a2ensite $myapp
+/etc/init.d/apache2 restart
+chmod -R g+rwx /opt/modwsgi/$myapp"_env"
+chgrp -R $SUDO_USER /opt/modwsgi/$myapp"_env"
+chown -R $SUDO_USER /opt/modwsgi/$myapp"_env"
+
+fi
+rm -r /opt/modwsgi/$myapp"_env"/$myapp
+cp -a /opt/templates/gstore_v3 /opt/modwsgi/$myapp"_env"/$myapp
+else
+echo -e "\033[31;5;148mYou must run createapp with the sudo command:\033[39m"
+echo -e "\033[31;5;148msudo createapp\033[39m"
+
+fi
+

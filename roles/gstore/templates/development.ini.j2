@@ -1,0 +1,204 @@
+[app:main]
+use = egg:gstore_v3
+
+pyramid.reload_templates = true
+pyramid.debug_authorization = false
+pyramid.debug_notfound = false
+pyramid.debug_routematch = true
+pyramid.default_locale_name = en
+pyramid.includes =
+    pyramid_tm
+
+#FOR THE SANDBOX ENVIRONMENT
+
+#readwrite postgres
+#sqlalchemy.url = postgresql://my_user:my_password@my_host:my_port/my_database
+{% for host in groups['postgres'] %}
+sqlalchemy.url = postgresql://{{ gstoreuser }}:{{ gstorepassword }}@{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:5432/{{ gstoredbname }}
+{% endfor %}
+
+
+#readwrite mongodb
+#mongo_uri = mongodb://my_user:my_password@my_host:my_port/my_database
+
+{% for host in groups['mongodb'] %}
+mongo_uri = mongodb://{{ gstoreuser }}:{{ gstorepassword }}@{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:27017/{{ gstoredbname }}
+{% endfor %}
+
+
+
+#mongodb collections
+#NOTE: vectors is misleading. it is the public document store for
+#      spatial and non-spatial records
+
+#public data
+mongo_collection = vectors 
+
+#embargoed data
+mongo_embargo_collection = embargos
+
+#inactive dataset data
+mongo_inactive_collection = inactives
+
+#readwrite for dataonelogging
+#NOTE: this is not (and should not) be the same db as the main datastore
+#dataone.url = postgresql://my_user:my_password@my_host:my_port/my_dataone_database
+{% for host in groups['postgres'] %}
+dataone.url = postgresql://{{ gstoreuser }}:{{ gstorepassword }}@{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:5432/{{ dataonedbname }}
+{% endfor %}
+
+
+#swift with keystone:
+swift_tenant = <Redacted>
+swift_username = <Redacted>
+swift_password = <Redacted>
+swift_auth= Example(https://edaccloud.unm.edu/identity/v2.0/tokens)
+
+
+
+#readwrite elasticsearch
+#elasticsearch
+
+{% for host in groups['elasticsearch'] %}
+es_root = http://{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:9200/
+es_dataset_index = gstore
+es_user = {{ gstoreuser }}:{{ gstorepassword }}
+es_dbuser= {{ gstoreuser }}
+es_dbpass={{ gstorepassword }}
+{% endfor %}
+
+
+#Token Generation
+tokengen = {{ gstorepassword }}
+
+
+#needed to use any mako templates (mapper, etc)
+mako.directories = gstore_v3:templates
+
+SRID = 4326
+
+DEFAULT_FORMATS = zip,shp,kml,csv,xls,json,rss,gml,tif,sid,ecw,dem,hdf,ascii,nc,grib,txt,html,pdf,doc,docx,xlsx,gz,png,gif,jpg,img,geojson,rest,bin,control
+
+DEFAULT_SERVICES = wms,wcs,wfs
+
+#                   plain fgdc        fgdc-rse          mi             svc       fc        ds           ours
+DEFAULT_STANDARDS = FGDC-STD-001-1998,FGDC-STD-012-2002,ISO-19115:2003,ISO-19119,ISO-19110,ISO-19115:DS,GSTORE
+
+DEFAULT_REPOSITORIES = LoboVault,DATA.gov,GEOSS,DataONE
+
+#NOTE: these are new mexico specific. update as necessary.
+OGC_SRS = EPSG:4326,EPSG:4269,EPSG:4267,EPSG:26913,EPSG:26912,EPSG:26914,EPSG:26713,EPSG:26712,EPSG:26714,EPSG:3857,EPSG:102100
+
+
+#NOTE: do not use a hard-coded base url (will affect new apps from the same svn repository)
+#host url for building metadata links, etc
+#BALANCER_URL = http://app_host
+{% for host in groups['gstore'] %}
+BALANCER_URL = http://{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}/gstore_v3/     
+{% endfor %}
+
+{% for host in groups['gstore'] %}
+BALANCER_URL_SECURE = https://{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}/gstore_v3/
+{% endfor %}
+
+#for dev 
+#BALANCER_URL = http://edaccloud.unm.edu/10.11.0.26/gstore_v3/
+
+
+
+#for the mapper
+#MEDIA_URL = http://app_host
+{% for host in groups['gstore'] %}
+MEDIA_URL = http://{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}/gstore_v3/
+{% endfor %}
+
+#path to the cache parent
+BASE_DATA_PATH = /clusterdata/gstore
+
+#cache of temporary cached zip files
+FORMATS_PATH = %(BASE_DATA_PATH)s/formats
+
+#cache to temporary map files (and the base map data). other than
+#base, this should be empty
+MAPS_PATH = %(BASE_DATA_PATH)s/maps
+
+#contains the mapserver wms template htmls
+MAP_TEMPLATE_PATH = %(BASE_DATA_PATH)s/map_templates
+
+#tmp directory in the cache
+TEMP_PATH = %(BASE_DATA_PATH)s/tmp
+
+#path to the prov ds records
+PROV_PATH = %(BASE_DATA_PATH)s/provenance
+
+#path to the dataone data cache (not temporary)
+DATAONE_PATH = %(BASE_DATA_PATH)s/dataone
+
+#to store the mongoimport json files as intermediate backups in case of disaster
+VECTOR_IMPORT_PATH = /mongo.backup/importlogs
+
+#path to the metadata xslts
+XSLT_PATH = %(here)s/resources
+
+[server:main]
+use = egg:waitress#main
+host = 0.0.0.0
+port = 6543
+
+# Begin logging configuration
+
+[loggers]
+#keys = root, gstore_v3, sqlalchemy
+keys = root, gstore_v3
+
+[handlers]
+#keys = console, filelog
+keys = console
+
+[formatters]
+keys = generic
+
+[logger_root]
+level = DEBUG
+handlers = console
+
+[logger_gstore_v3]
+level = DEBUG
+handlers =
+qualname = gstore_v3
+
+#[logger_sqlalchemy]
+#level = DEBUG
+#handlers = filelog
+#qualname = sqlalchemy.engine
+## "level = INFO" logs SQL queries.
+## "level = DEBUG" logs SQL queries and results.
+## "level = WARN" logs neither.  (Recommended for production systems.)
+
+
+#[logger_sqlalchemy.orm]
+#level = INFO
+#handlers = filelog
+#qualname = sqlalchemy.orm
+
+#[logger_sqlalchemy.pool]
+#level = INFO
+#handlers = filelog
+#qualname = sqlalchemy.pool
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+#[handler_filelog]
+#class = FileHandler
+#args = ('%(here)s/logs/gstore_v3.log', 'a')
+#level = NOTSET
+#formatter = generic
+
+[formatter_generic]
+format = %(asctime)s %(levelname)-5.5s [%(name)s][%(threadName)s] %(message)s
+
+# End logging configuration

@@ -1,0 +1,33 @@
+-- insert the initial app, myapp
+INSERT INTO gstoredata.apps(name, full_name, route_key, preferred_metadata_standards)
+VALUES('GSTORE', 'Default app', 'gstore', '{FGDC-STD-001-1998,FGDC-STD-012-2002,ISO-19115:2003}');
+
+-- insert a default category
+INSERT INTO gstoredata.categories(theme, subtheme, groupname, apps)
+VALUES('GSToRE', 'Files', 'General', '{gstore}');
+
+
+-- insert the default quality control value
+INSERT INTO gstoredata.cv_qualitycontrollevels(code, definition)
+VALUES('-9999', 'Unknown');
+
+-- insert the default metadata standards
+INSERT INTO gstoredata.metadata_standards(name, alias, supported_formats)
+VALUES('FGDC', 'FGDC-STD-001-1998', '{xml,html}');
+
+INSERT INTO gstoredata.metadata_standards(name, alias, supported_formats)
+VALUES('FGDC-RSE', 'FGDC-STD-012-2002', '{xml,html}');
+
+INSERT INTO gstoredata.metadata_standards(name, alias, supported_formats)
+VALUES('ISO MI', 'ISO-19115:2003', '{xml,html}');
+
+INSERT INTO gstoredata.metadata_standards(name, alias, supported_formats)
+VALUES('ISO Service Identification', 'ISO-19119', '{xml}');
+
+INSERT INTO gstoredata.metadata_standards(name, alias, supported_formats)
+VALUES('ISO Feature Catalogue', 'ISO-19110', '{xml}');
+
+INSERT INTO gstoredata.metadata_standards(name, alias, supported_formats)
+VALUES('ISO Data Series', 'ISO-19115:DS', '{xml}');
+
+

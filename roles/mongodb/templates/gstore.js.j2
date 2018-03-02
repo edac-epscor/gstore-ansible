@@ -1,0 +1,11 @@
+db.createCollection('vectors')
+db.createCollection('embargos')
+db.createCollection('inactives')
+db.vectors.ensureIndex({'d.id': 1, 'f.id': 1})
+db.vectors.ensureIndex({'d.id': 1, 'r.id': 1})
+db.embargos.ensureIndex({'d.id': 1, 'f.id': 1})
+db.embargos.ensureIndex({'d.id': 1, 'r.id': 1})
+db.inactives.ensureIndex({'d.id': 1, 'f.id': 1})
+db.inactives.ensureIndex({'d.id': 1, 'r.id': 1})
+db.addUser({user: "{{ gstoreuser }}", pwd: "{{ gstorepassword }}", roles: ["readWrite"]})
+

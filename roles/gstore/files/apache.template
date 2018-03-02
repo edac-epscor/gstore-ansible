@@ -1,0 +1,15 @@
+WSGIApplicationGroup gstore_v3
+WSGIPassAuthorization On
+WSGIDaemonProcess gstore_v3 user=www-data group=staff threads=4 \
+   python-path=/opt/modwsgi/gstore_v3_env/lib/python2.7/site-packages
+WSGIScriptAlias /gstore_v3 /opt/modwsgi/gstore_v3_env/pyramid.wsgi
+
+Alias /crossdomain.xml /opt/modwsgi/gstore_v3_env/gstore_v3/crossdomain.xml
+
+<Directory /opt/modwsgi/gstore_v3_env>
+  WSGIProcessGroup gstore_v3
+  Order allow,deny
+  Allow from all
+  Require all granted
+</Directory>
+

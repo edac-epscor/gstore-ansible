@@ -1,0 +1,12 @@
+[postgres]
+yourserver.your.domain
+
+[elasticsearch]
+yourserver.your.domain
+
+[mongodb]
+yourserver.your.domain
+
+[gstore]
+yourserver.your.domain
+

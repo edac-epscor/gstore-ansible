@@ -1,0 +1,199 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: errors; Type: TABLE; Schema: public; Owner: {{ gstoreuser }}; Tablespace: 
+--
+
+CREATE TABLE errors (
+    id integer NOT NULL,
+    message character varying(1000),
+    received timestamp with time zone DEFAULT timezone('UTC'::text, now()) NOT NULL
+);
+
+
+ALTER TABLE public.errors OWNER TO {{ gstoreuser }};
+
+--
+-- Name: errors_id_seq; Type: SEQUENCE; Schema: public; Owner: {{ gstoreuser }}
+--
+
+CREATE SEQUENCE errors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.errors_id_seq OWNER TO {{ gstoreuser }};
+
+--
+-- Name: errors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: {{ gstoreuser }}
+--
+
+ALTER SEQUENCE errors_id_seq OWNED BY errors.id;
+
+
+--
+-- Name: logs; Type: TABLE; Schema: public; Owner: {{ gstoreuser }}; Tablespace: 
+--
+
+CREATE TABLE logs (
+    id integer NOT NULL,
+    identifier character varying(500),
+    ip_address character varying(20),
+    useragent character varying(50),
+    subject character varying(200),
+    logged timestamp with time zone DEFAULT timezone('UTC'::text, now()) NOT NULL,
+    event character varying(20),
+    node character varying(100)
+);
+
+
+ALTER TABLE public.logs OWNER TO {{ gstoreuser }};
+
+--
+-- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner: {{ gstoreuser }}
+--
+
+CREATE SEQUENCE logs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.logs_id_seq OWNER TO {{ gstoreuser }};
+
+--
+-- Name: logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: {{ gstoreuser }}
+--
+
+ALTER SEQUENCE logs_id_seq OWNED BY logs.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: {{ gstoreuser }}
+--
+
+ALTER TABLE ONLY errors ALTER COLUMN id SET DEFAULT nextval('errors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: {{ gstoreuser }}
+--
+
+ALTER TABLE ONLY logs ALTER COLUMN id SET DEFAULT nextval('logs_id_seq'::regclass);
+
+
+--
+-- Name: d1_errors_pkey; Type: CONSTRAINT; Schema: public; Owner: {{ gstoreuser }}; Tablespace: 
+--
+
+ALTER TABLE ONLY errors
+    ADD CONSTRAINT d1_errors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: logs_pk; Type: CONSTRAINT; Schema: public; Owner: {{ gstoreuser }}; Tablespace: 
+--
+
+ALTER TABLE ONLY logs
+    ADD CONSTRAINT logs_pk PRIMARY KEY (id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+GRANT USAGE ON SCHEMA public TO {{ gstoreuser }};
+
+
+--
+-- Name: errors; Type: ACL; Schema: public; Owner: {{ gstoreuser }}
+--
+
+REVOKE ALL ON TABLE errors FROM PUBLIC;
+REVOKE ALL ON TABLE errors FROM {{ gstoreuser }};
+GRANT ALL ON TABLE errors TO {{ gstoreuser }};
+GRANT SELECT ON TABLE errors TO {{ gstoreuser }};
+GRANT SELECT,INSERT,UPDATE ON TABLE errors TO {{ gstoreuser }};
+
+
+--
+-- Name: errors_id_seq; Type: ACL; Schema: public; Owner: {{ gstoreuser }}
+--
+
+REVOKE ALL ON SEQUENCE errors_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE errors_id_seq FROM {{ gstoreuser }};
+GRANT ALL ON SEQUENCE errors_id_seq TO {{ gstoreuser }};
+GRANT SELECT,USAGE ON SEQUENCE errors_id_seq TO {{ gstoreuser }};
+
+
+--
+-- Name: logs; Type: ACL; Schema: public; Owner: {{ gstoreuser }}
+--
+
+REVOKE ALL ON TABLE logs FROM PUBLIC;
+REVOKE ALL ON TABLE logs FROM {{ gstoreuser }};
+GRANT ALL ON TABLE logs TO {{ gstoreuser }};
+GRANT SELECT ON TABLE logs TO {{ gstoreuser }};
+GRANT SELECT,INSERT,UPDATE ON TABLE logs TO {{ gstoreuser }};
+
+
+--
+-- Name: logs_id_seq; Type: ACL; Schema: public; Owner: {{ gstoreuser }}
+--
+
+REVOKE ALL ON SEQUENCE logs_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE logs_id_seq FROM {{ gstoreuser }};
+GRANT ALL ON SEQUENCE logs_id_seq TO {{ gstoreuser }};
+GRANT ALL ON SEQUENCE logs_id_seq TO {{ gstoreuser }};
+
+
+--
+-- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: public; Owner: postgres
+--
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE ALL ON TABLES  FROM PUBLIC;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE ALL ON TABLES  FROM postgres;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT SELECT ON TABLES  TO {{ gstoreuser }};
+
+
+--
+-- PostgreSQL database dump complete
+--
+

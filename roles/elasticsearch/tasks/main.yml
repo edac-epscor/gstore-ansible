@@ -1,0 +1,42 @@
+---
+
+- name: Update packages 
+  apt: update_cache=yes
+
+
+- name: Install the package "openjdk-7-jre-headless"
+  apt:
+    name: openjdk-7-jre-headless
+    state: present
+
+- name: Install the package "python-setuptools"
+  apt:
+    name: python-setuptools
+    state: present
+
+
+- name: copy elasticsearch-0.90.5.deb
+  copy: src=elasticsearch-0.90.5.deb dest=/usr/local/src/elasticsearch-0.90.5.deb
+
+
+- name: copy dbsetup.sh
+  copy: src=dbsetup.sh dest=/usr/local/src/dbsetup.sh
+- name: Install elasticsearch
+  command: dpkg -i /usr/local/src/elasticsearch-0.90.5.deb
+- name: setup server name
+  command: "su -c 'echo node.name: gstorenode >> /etc/elasticsearch/elasticsearch.yml' - root"
+- name: setup standalone config
+  command: "su -c 'echo cluster.name: gstorecluster >> /etc/elasticsearch/elasticsearch.yml' - root"
+- name: fix node as local
+  command: "su -c 'echo node.local: true >> /etc/elasticsearch/elasticsearch.yml' - root"
+- name: set elasticsearch to start automaticly
+  command: update-rc.d elasticsearch defaults 95 10
+- name: Startup elasticsearch
+  command: service elasticsearch start
+- name: Wait for es to start
+  wait_for: port=9200 delay=5
+- file:
+    path: /usr/local/src/dbsetup.sh
+    mode: 0775
+- name: Create index and mappings
+  command: /usr/local/src/dbsetup.sh

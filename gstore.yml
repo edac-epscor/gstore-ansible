@@ -1,0 +1,39 @@
+#---
+# This playbook deploys a gstore app
+#
+
+
+---
+
+- hosts: all
+  remote_user: '{{ sudouser }}'
+  sudo: yes
+  roles:
+    - inv
+
+
+- hosts: mongodb
+  remote_user: '{{ sudouser }}'
+  sudo: yes
+  roles:
+    - mongodb
+
+- hosts: elasticsearch
+  remote_user: '{{ sudouser }}'
+  sudo: yes
+  roles:
+    - elasticsearch
+
+- hosts: postgres
+  remote_user: '{{ sudouser }}'
+  sudo: yes
+  roles:
+    - postgres
+
+- hosts: gstore
+  remote_user: '{{ sudouser }}'
+  sudo: yes
+  roles:
+    - gstore
+
+

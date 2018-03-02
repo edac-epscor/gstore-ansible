@@ -1,0 +1,8 @@
+# Here are variables related to instilation. This should be modified outside of Ansible.
+
+gstoreuser: gstore
+gstorepassword: secretpassword
+gstoredbname: gstore3
+dataonedbname: dataone
+sudouser: ubuntu
+
