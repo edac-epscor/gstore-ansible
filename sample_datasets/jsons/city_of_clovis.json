@@ -1,0 +1,45 @@
+{
+    "sources": [
+        {
+            "mimetype": "txt/html", 
+            "files": [
+                "http://maps.cityofclovis.org"
+            ], 
+            "set": "original", 
+            "external": "true", 
+            "extension": "html"
+        }
+    ], 
+    "description": "City of Clovis GIS", 
+    "formats": [
+        "html"
+    ], 
+    "services": [], 
+    "taxonomy": "file", 
+    "basename": "clovisgis", 
+    "dataone_archive": false,
+    "releasedate": "2018-02-12",
+    "is_embargoed":false,
+    "author":"admin",
+    "spatial": {
+        "epsg": 2903, 
+        "bbox": "-103.740253,34.302597,-103.042661,34.954233"
+    }, 
+    "apps": [
+        "gstore" 
+    ], 
+    "standards": [
+        "FGDC-STD-001-1998",
+        "ISO-19115:2003"
+    ],
+    "categories": [{
+        "theme": "GSToRE", 
+        "subtheme": "Files", 
+        "groupname": "General"
+    }], 
+    "metadata": {
+        "xml": "/geodata/sample_datasets/metadata/cityofclovis.xml",
+        "upgrade": "true",
+        "standard": "FGDC-STD-001-1998"
+    }
+}

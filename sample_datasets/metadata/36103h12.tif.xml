@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://www.ngdc.noaa.gov/metadata/published/xsd/ngdcSchema/schema.xsd">
+   <idinfo>
+      <citation>
+         <citeinfo>
+            <origin>U.S. Geological Survey (USGS) EROS Data Center (EDC)</origin>
+            <pubdate>20091217</pubdate>
+            <title>Goodson School, NM, NE Quarter, 1988</title>
+            <geoform>remote-sensing image</geoform>
+            <pubinfo>
+               <pubplace>Menlo Park, CA USA</pubplace>
+               <publish>U.S. Geological Survey</publish>
+            </pubinfo>
+
+         </citeinfo>
+      </citation>
+      <descript>
+         <abstract>Orthophotos combine the image characteristics of a photograph with the geometric qualities of a map. The primary digital orthophotoquadrangle (DOQ) is a 1-meter ground resolution, quarter-quadrangle (3.75 minutes of latitude by 3.75 minutes of longitude) image cast on the Universal Transverse Mercator projection (UTM) on the North American Datum of 1983 (NAD83). The geographic extent of the DOQ is equivalent to a quarter-quadrangle plus the overedge ranges from a minimum of 50 meters to a maximum of 300 meters beyond the extremes of the primary and secondary corner points.</abstract>
+         <purpose>DOQs serve a variety of purposes, from interim maps to field references for Earth science investigations and analysis.  The DOQ is useful as a layer of a geographic information system and as a tool for revision of digital line graphs and topographic maps.</purpose>
+         <supplinf>DOQQs are available in two formats. The GeoTIFFs are uncompressed files, and due to file size limitations, are not available for downloading from the Resource Geographic Information System Program (RGIS) website. Therefore, they are available only through the custom order process described in the Distribution section of these metadata. The MrSid (.sid) files and/or Enhanced Compressed Wavelet files have been created from the GeoTIFFs and are a 1:40 (.sid) and 1:15 (.ecw) compression of the GeoTIFF file. The compression creates a smaller file size that can be downloaded easily from the RGIS website and is readily available.</supplinf>
+      </descript>
+      <timeperd>
+         <timeinfo>
+            <sngdate>
+               <caldate>19881010</caldate>
+            </sngdate>
+         </timeinfo>
+         <current>ground condition</current>
+      </timeperd>
+      <status>
+         <progress>Complete</progress>
+         <update>sporadic</update>
+      </status>
+      <spdom>
+         <bounding>
+            <westbc>-103.068012123</westbc>
+            <eastbc>-102.99492913</eastbc>
+            <northbc>37.0026489346</northbc>
+            <southbc>36.9349026634</southbc>
+         </bounding>
+      </spdom>
+      <keywords>
+         <theme>
+            <themekt>ISO 19115 Topic Categories</themekt>
+            <themekey>imageryBaseMapsEarthCover</themekey>
+         </theme>
+         <theme>
+            <themekt>none</themekt>
+            <themekey>DOQ</themekey>
+            <themekey>digital image map</themekey>
+            <themekey>digital orthophotoquad</themekey>
+            <themekey>DOQQ</themekey>
+            <themekey>quarter-quadrangle orthophoto</themekey>
+            <themekey>rectified photograph</themekey>
+            <themekey>orthophoto</themekey>
+            <themekey>1-meter orthophoto</themekey>
+            <themekey>3.75 x 3.75 minute orthophoto</themekey>
+            <themekey>aerial photograph</themekey>
+            <themekey>digital orthophoto</themekey>
+         </theme>
+         <place>
+            <placekt>Spatial Reference System Identifiers</placekt>
+            <placekey>EPSG:4269</placekey>
+            <placekey>EPSG:7019</placekey>
+            <placekey>EPSG:26713</placekey>
+         </place>
+         <place>
+            <placekt>None</placekt>
+            <placekey>US</placekey>
+            <placekey>NM</placekey>
+            <placekey>GOODSON SCHOOL</placekey>
+         </place>
+      </keywords>
+      <accconst>none</accconst>
+      <useconst>None.  Acknowledgement of the U.S. Geological Survey and RGIS is appreciated in products derived from these data.</useconst>
+      <ptcontac>
+         <cntinfo>
+            <cntorgp>
+               <cntorg>U.S. Geological Survey EROS Data Center</cntorg>
+               <cntper>Customer Services Representative</cntper>
+            </cntorgp>
+            <cntpos>Customer Services Representative</cntpos>
+            <cntaddr>
+               <addrtype>mailing and physical address</addrtype>
+               <address>Customer Services U.S. Geological Survey EROS Data Center</address>
+               <city>Sioux Falls</city>
+               <state>SD</state>
+               <postal>57198-0001</postal>
+               <country>USA</country>
+            </cntaddr>
+            <cntvoice>
+605-594-6151 or USA toll free:  1-888-ASK-USGS (275-8747)
+Contact_TDD_TTY_Telephone: 605-594-6933
+</cntvoice>
+            <cntfax>605-594-6589</cntfax>
+            <cntemail>custserv@usgs.gov</cntemail>
+            <hours>0800 - 1600 CT, M-F, -6 hours GMT</hours>
+         </cntinfo>
+      </ptcontac>
+      <browse>
+         <browsen>O3610308.NES</browsen>
+         <browsed>image</browsed>
+         <browset>JPEG</browset>
+      </browse>
+      <native>Microsoft Windows Vista Version 6.1 (Build 7600); ESRI ArcCatalog 9.3.1.3000</native>
+   </idinfo>
+   <dataqual>
+      <attracc>
+         <attraccr>During photographic reproduction of the source photography, limited analog dodging is performed to improve image quality. Analog dodging consists of holding back light from certain areas of the sensitized photographic material to avoid overexposure. The diapositive is inspected to insure clarity and radiometric uniformity. Diapositive image brightness values are collected with a minimum of image quality manipulation. Image brightness values may deviate from brightness values of the original imagery due to image value interpolation during the scanning and rectification processes. Radiometry is verified by visually inspecting the DOQs to the original unrectified image to determine if the DOQ has the same image quality or better image quality than the original unrectified input image.  Slight systematic and radiometric differences can be detected between adjacent DOQ files due primarily to differences in source photography capture dates and Sun angles of aerial photography along flight lines. These differences can be observed in an image's general lightness or darkness when compared to adjacent DOQ files.</attraccr>
+         <qattracc>
+            <attraccv>7.0 meters RMSE</attraccv>
+            <attracce>The DOQ root-mean-square-error (RMSE) is the square root of the average of the squared discrepancies. These discrepancies are the differences in coordinate (x and y) values derived by comparing the data being tested with values determined during aerotriangulation or by an independent survey of higher accuracy.</attracce>
+         </qattracc>
+      </attracc>
+      <logic>All DOQ header data and image file sizes are validated by Tape Validation System (TVS) software prior to archiving in the Sales Data Base. This validation procedure assures correct physical format and field values for header record elements. Logical relationships between header record elements are tested.</logic>
+      <complete>All DOQ images are visually inspected for completeness to ensure that no gaps or image misplacement exists in the image area or in overedge coverage. The DOQ images may be derived by mosaicking multiple images, in order to ensure complete coverage. All DOQs are cloud free. Some clouds may (very infrequently) be encountered only in the overedge coverage. Source photography is leaf-off in deciduous vegetation regions. Void areas may exist, having a radiometric value of zero and appearing black. These voids are areas for which no photographic source is available or are the result of image transformation from other planimetric systems to the UTM projection. In the latter case, the void sliver areas are on the outside edges of the overedge area. The data set field content of each DOQ header record element is validated to assure completeness prior to archiving in the Sales Data Base.</complete>
+      <posacc>
+         <horizpa>
+            <horizpar>The DOQ horizontal positional accuracy and the assurance of that accuracy depend, in part, on the accuracy of the data inputs to the rectification process. These inputs consist of the digital elevation model (DEM), aerotriangulation control and methods, the photo source camera calibration, scanner calibration, and aerial photographs that meet National Aerial Photography Program (NAPP) standards.  Field control is acquired by third order class 1 or better survey methods sufficiently spaced to meet National Map Accuracy Standards for 1:12,000 scale products. Aerial cameras have current certification from the USGS, National Mapping Division, Optical Science Laboratory. Test calibration scans are performed on all source photography scanners.</horizpar>
+         </horizpa>
+         <vertacc>
+            <vertaccr>The vertical accuracy of the verified USGS format DEM is equivalent to or better than a USGS level-1 or -2 DEM.</vertaccr>
+            <qvertpa>
+               <vertaccv>7</vertaccv>
+               <vertacce>meters</vertacce>
+            </qvertpa>
+         </vertacc>
+      </posacc>
+      <lineage>
+         <srcinfo>
+            <srccite>
+               <citeinfo>
+                  <origin>U.S. Geological Survey</origin>
+                  <pubdate>Unknown</pubdate>
+                  <title>GOODSON SCHOOL</title>
+                  <geoform>map</geoform>
+                  <pubinfo>
+                     <pubplace>Menlo Park, CA USA</pubplace>
+                     <publish>U.S. Geological Survey</publish>
+                  </pubinfo>
+               </citeinfo>
+            </srccite>
+            <typesrc>cartridge tape</typesrc>
+            <srctime>
+               <timeinfo>
+                  <rngdates>
+                     <begdate>19880805</begdate>
+                     <enddate>Present</enddate>
+                  </rngdates>
+               </timeinfo>
+               <srccurr>ground condition</srccurr>
+            </srctime>
+            <srccitea>DEM1</srccitea>
+            <srccontr>Elevation data in the form of an ortho-DEM regridded to user-specified intervals and bounds</srccontr>
+         </srcinfo>
+         <srcinfo>
+            <srccite>
+               <citeinfo>
+                  <origin>U.S. Geological Survey</origin>
+                  <pubdate>Unknown</pubdate>
+                  <title>NAPP 990 067</title>
+                  <geoform>remote-sensing image</geoform>
+                  <pubinfo>
+                     <pubplace>Menlo Park, CA USA</pubplace>
+                     <publish>U.S. Geological Survey</publish>
+                  </pubinfo>
+               </citeinfo>
+            </srccite>
+            <srcscale>40000</srcscale>
+            <typesrc>cartridge tape</typesrc>
+            <srctime>
+               <timeinfo>
+                  <rngdates>
+                     <begdate>Unknown</begdate>
+                     <enddate>Present</enddate>
+                  </rngdates>
+               </timeinfo>
+               <srccurr>ground condition</srccurr>
+            </srctime>
+            <srccitea>PHOTO1</srccitea>
+            <srccontr>Panchromatic black and white (or color infrared) NAPP or NAPP-like photograph. The NAPP photographs are centered on the DOQ coverage area.</srccontr>
+         </srcinfo>
+         <srcinfo>
+            <srccite>
+               <citeinfo>
+                  <origin>U.S. Geological Survey</origin>
+                  <pubdate>Unpublished material</pubdate>
+                  <title>project ground and photo control</title>
+                  <geoform>remote-sensing image</geoform>
+                  <pubinfo>
+                     <pubplace>Menlo Park, CA USA</pubplace>
+                     <publish>U.S. Geological Survey</publish>
+                  </pubinfo>
+               </citeinfo>
+            </srccite>
+            <typesrc>Various media</typesrc>
+            <srctime>
+               <timeinfo>
+                  <rngdates>
+                     <begdate>Unknown</begdate>
+                     <enddate>Present</enddate>
+                  </rngdates>
+               </timeinfo>
+               <srccurr>ground condition</srccurr>
+            </srctime>
+            <srccitea>CONTROL_INPUT</srccitea>
+            <srccontr>Horizontal and vertical control used to establish positions and elevations for reference and correlation purposes.</srccontr>
+         </srcinfo>
+         <srcinfo>
+            <srccite>
+               <citeinfo>
+                  <origin>U.S. Geological Survey</origin>
+                  <pubdate>Unpublished material</pubdate>
+                  <title>Report of calibration</title>
+                  <geoform>remote-sensing image</geoform>
+                  <pubinfo>
+                     <pubplace>Menlo Park, CA  USA</pubplace>
+                     <publish>U.S. Geological Survey</publish>
+                  </pubinfo>
+               </citeinfo>
+            </srccite>
+            <typesrc>disc, paper</typesrc>
+            <srctime>
+               <timeinfo>
+                  <rngdates>
+                     <begdate>Unknown</begdate>
+                     <enddate>Present</enddate>
+                  </rngdates>
+               </timeinfo>
+               <srccurr>Date of camera calibration associated with the source photography</srccurr>
+            </srctime>
+            <srccitea>CAMERA_INPUT</srccitea>
+            <srccontr>camera calibration parameters</srccontr>
+         </srcinfo>
+         <procstep>
+            <procdesc>To produce a DOQ requires (1) a minimum of three ground positions that can be identified on the photograph to be rectified, (2) camera calibration parameters, such as the calibrated focal length and the coordinates of the camera fiducials, (3) a digital elevation model (DEM), and (4) a digital image produced by scanning an aerial photograph with a precise, high-resolution scanner.  The digital image is rectified to generate an orthophoto by processing requirements 1 through 3 above for each image picture element (pixel), using rigorous photogrammetric equations on a computer. The finished product is a spatially accurate image with planimetric features represented in their true geographic positions.</procdesc>
+            <procdate>Unknown</procdate>
+            <proccont>
+               <cntinfo>
+                  <cntorgp>
+                     <cntorg>U.S. Geological Survey EROS Data Center</cntorg>
+                     <cntper>Customer Services Representative</cntper>
+                  </cntorgp>
+                  <cntpos>Customer Services Representative</cntpos>
+                  <cntaddr>
+                     <addrtype>mailing and physical address</addrtype>
+                     <address>Customer Services U.S. Geological Survey EROS Data Center</address>
+                     <city>Sioux Falls</city>
+                     <state>SD</state>
+                     <postal>57198-0001</postal>
+                     <country>USA</country>
+                  </cntaddr>
+                  <cntvoice>
+605-594-6151 or USA toll free:  1-888-ASK-USGS (275-8747)
+Contact_TDD_TTY_Telephone: 605-594-6933
+</cntvoice>
+                  <cntfax>605-594-6589</cntfax>
+                  <cntemail>custserv@usgs.gov</cntemail>
+                  <hours>0800 - 1600 CT, M-F, -6 hours GMT</hours>
+               </cntinfo>
+            </proccont>
+         </procstep>
+         <procstep>
+            <procdesc>The georeferenced images were compressed using Lizard Tech MrSid software with a 1:40 compression ratio or ER Mapper Image Compressor 7.2 with a 1:15 compression ratio.</procdesc>
+            <procdate>Unknown</procdate>
+            <proccont>
+               <cntinfo>
+                  <cntorgp>
+                     <cntorg>Earth Data Analysis Center</cntorg>
+                  </cntorgp>
+                  <cntpos>Clearinghouse Manager</cntpos>
+                  <cntaddr>
+                     <addrtype>mailing and physical address</addrtype>
+                     <address>
+MSC01 1110, Bandelier West Room 111
+1 University of New Mexico
+</address>
+                     <city>Albuquerque</city>
+                     <state>NM</state>
+                     <postal>87131-0001</postal>
+                     <country>USA</country>
+                  </cntaddr>
+                  <cntvoice>505-277-3622 ext. 230</cntvoice>
+                  <cntfax>505-277-3614</cntfax>
+                  <cntemail>clearinghouse@edac.unm.edu</cntemail>
+                  <hours>0800 - 1700 MT, M-F -7 hours GMT</hours>
+               </cntinfo>
+            </proccont>
+         </procstep>
+      </lineage>
+   </dataqual>
+   <spdoinfo>
+      <indspref>Union County (35059)</indspref>
+      <direct>Raster</direct>
+      <rastinfo>
+         <cvaltype>unsigned eight-bit integer</cvaltype>
+         <rasttype>Pixel</rasttype>
+         <rowcount>7661</rowcount>
+         <colcount>6360</colcount>
+      </rastinfo>
+   </spdoinfo>
+   <spref>
+      <horizsys>
+         <planar>
+            <gridsys>
+                <gridsysn>Universal Transverse Mercator</gridsysn>
+                <utm>
+                    <utmzone>13</utmzone>
+                    <transmer>
+                        <sfctrmer>0.999600</sfctrmer>
+                        <longcm>-105.000000</longcm>
+                        <latprjo>0.000000</latprjo>
+                        <feast>500000.000000</feast>
+                        <fnorth>0.000000</fnorth>
+                    </transmer>
+                </utm>
+            </gridsys>
+            <planci>
+               <plance>row and column</plance>
+               <coordrep>
+                  <absres>1</absres>
+                  <ordres>1</ordres>
+               </coordrep>
+               <plandu>meters</plandu>
+            </planci>
+         </planar>
+         <geodetic>
+                <horizdn>North American Datum of 1927</horizdn>
+                <ellips>Clarke 1866</ellips>
+                <semiaxis>6378206.400000</semiaxis>
+                <denflat>294.978698</denflat>
+            </geodetic>
+      </horizsys>
+   </spref>
+   <eainfo>
+      <overview>
+         <eaover>Each pixel contains an 8-bit gray-scale value between 0 and 255 for DOQs from a panchromatic source. A value of 0 represents the color black, while a value of 255 represents the color white. All values between 0 and 255 are represented as a shade of gray, varying from black to white. For color-infrared and natural color DOQs, a digital number from 0 to 255 also is assigned to each pixel, but that number refers to a color look-up table which contains the red, green, and blue (RGB) values, each from 0 to 255, for that digital number. Areas where the rectification process is incomplete due to incomplete data (e.g., lack of elevation data, gaps), are represented with the numeric value of 0.</eaover>
+         <eadetcit>U.S. Department of the Interior, U.S. Geological Survey, guide for digital orthophotos: Reston, VA. A hypertext version is available at http://edc.usgs.gov/glis/hyper/guide/usgs_doq. U.S. Department of the Interior, U.S. Geological Survey, 1992, Standards for digital orthophotos. Reston, VA. Softcopies in ASCII, WordPerfect, and PostScript format are available at ftp://mapping.usgs.gov/pub/ti/DOQ/</eadetcit>
+      </overview>
+   </eainfo>
+   <distinfo>
+      <distrib>
+         <cntinfo>
+            <cntorgp>
+               <cntorg>Earth Data Analysis Center</cntorg>
+            </cntorgp>
+            <cntpos>Clearinghouse Manager</cntpos>
+            <cntaddr>
+               <addrtype>mailing and physical address</addrtype>
+               <address>MSC01 1110</address>
+               <address>1 University of New Mexico</address>
+               <city>Albuquerque</city>
+               <state>NM</state>
+               <postal>87131-0001</postal>
+               <country>USA</country>
+            </cntaddr>
+            <cntvoice>505-277-3622 ext. 230</cntvoice>
+            <cntfax>505-277-3614</cntfax>
+            <cntemail>clearinghouse@edac.unm.edu</cntemail>
+            <hours>0800 - 1700 MT, M-F -7 hours GMT</hours>
+         </cntinfo>
+      </distrib>
+      <resdesc>Downloadable Data</resdesc>
+      <distliab>The material on this site is made available as a public service. Maps and data are to be used for reference purposes only and the Earth Data Analysis Center (EDAC), Resource Geographic Information System (RGIS) and The University of New Mexico are not responsible for any inaccuracies herein contained. No responsibility is assumed for damages or other liabilities due to the accuracy, availability, use or misuse of the information herein provided. Unless otherwise indicated in the documentation (metadata) for individual data sets, information on this site is public domain and may be copied without permission; citation of the source is appreciated.</distliab>
+      <stdorder>
+         <digform>
+            <digtinfo>
+               <formname>Tagged Image File Format (TIFF)</formname>
+               <transize>47</transize>
+            </digtinfo>
+            <digtopt>
+               <onlinopt>
+                  <computer>
+                     <networka>
+                        <networkr>http://gstore.unm.edu/apps/rgis/datasets/c2e948ee-2ea9-4dc4-935b-b5e56ff8071c/36103h12.original.tif</networkr>
+                     </networka>
+                  </computer>
+                  <accinstr>Download from Resource Geographic Information System (RGIS) at http://rgis.unm.edu.</accinstr>
+               </onlinopt>
+            </digtopt>
+         </digform>
+         <fees>None. The files are available to download from Resource Geographic Information System (RGIS) (http://rgis.unm.edu).</fees>
+         <ordering>Contact Earth Data Analysis Center at clearinghouse@edac.unm.edu</ordering>
+      </stdorder>
+      <stdorder>
+         <digform>
+            <digtinfo>
+               <formname>Multi-resolution Seamless Image Database (MrSID)</formname>
+               <transize>2</transize>
+            </digtinfo>
+            <digtopt>
+               <onlinopt>
+                  <computer>
+                     <networka>
+                        <networkr>http://gstore.unm.edu/apps/rgis/datasets/c2e948ee-2ea9-4dc4-935b-b5e56ff8071c/36103h12.derived.sid</networkr>
+                     </networka>
+                  </computer>
+                  <accinstr>Download from Resource Geographic Information System (RGIS) at http://rgis.unm.edu.</accinstr>
+               </onlinopt>
+            </digtopt>
+         </digform>
+         <fees>None. The files are available to download from Resource Geographic Information System (RGIS) (http://rgis.unm.edu).</fees>
+         <ordering>Contact Earth Data Analysis Center at clearinghouse@edac.unm.edu</ordering>
+      </stdorder>
+      <custom>Contact Earth Data Analysis Center at clearinghouse@edac.unm.edu</custom>
+      <techpreq>Adequate computer capability is the only technical prerequisite for viewing data in digital form.</techpreq>
+   </distinfo>
+   <metainfo>
+      <metd>20180323</metd>
+      <metc>
+         <cntinfo>
+            <cntorgp>
+               <cntorg>Earth Data Analysis Center</cntorg>
+            </cntorgp>
+            <cntpos>Clearinghouse Manager</cntpos>
+            <cntaddr>
+               <addrtype>mailing and physical address</addrtype>
+               <address>MSC01 1110</address>
+               <address>1 University of New Mexico</address>
+               <city>Albuquerque</city>
+               <state>NM</state>
+               <postal>87131-0001</postal>
+               <country>USA</country>
+            </cntaddr>
+            <cntvoice>505-277-3622 ext. 230</cntvoice>
+            <cntfax>505-277-3614</cntfax>
+            <cntemail>clearinghouse@edac.unm.edu</cntemail>
+            <hours>0800 - 1700 MT, M-F -7 hours GMT</hours>
+         </cntinfo>
+      </metc>
+      <metstdn>FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+      <metstdv>FGDC-STD-001-1998</metstdv>
+      <mettc>local time</mettc>
+      <metextns>
+         <onlink>http://www.fgdc.gov/standards/projects/FGDC-standards-projects/csdgm_rs_ex/MetadataRemoteSensingExtens.pdf</onlink>
+         <metprof>Extensions for Remote Sensing Metadata, FGDC-STD-012-2002</metprof>
+      </metextns>
+   </metainfo>
+</metadata>

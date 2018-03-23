@@ -1,0 +1,323 @@
+﻿<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Bureau of Land Management - New Mexico State Office</origin>
+        <pubdate>2014</pubdate>
+        <title>NLCS Wilderness Area Polygons</title>
+        <geoform>vector digital data</geoform>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>>Polygon features depicting the NLCS Wilderness Areas.</abstract>
+      <purpose>Polygon features depicting the NLCS Wilderness Areas. A Wilderness is a special place where the earth and its community of life are essentially undisturbed; they retain a primeval character, without permanent improvements and generally appear to have been affected primarily by the forces of nature. In 1964, Congress established the National Wilderness Preservation System and designated the first Wilderness Areas in passing the Wilderness Act. The uniquely American idea of wilderness has become an increasingly significant tool to ensure long-term protection of natural landscapes. Wilderness protects the habitat of numerous wildlife species and serves as a biodiversity bank for many species of plants and animals. Wilderness is also a source of clean water.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <sngdate>
+          <caldate>2014</caldate>
+        </sngdate>
+      </timeinfo>
+      <current>Publication date</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>Yearly</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-108.259526</westbc>
+        <eastbc>-104.393875</eastbc>
+        <northbc>36.359462</northbc>
+        <southbc>34.581214</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Categories</themekt>
+        <themekey>planningCadastre</themekey>
+      </theme>
+      <theme>
+        <themekt>User Defined</themekt>
+        <themekey>Ownership</themekey>
+        <themekey>Wilderness</themekey>
+        <themekey>Management</themekey>
+        <themekey>Land</themekey>
+      </theme>
+      <place>
+        <placekt>None</placekt>
+        <placekey>New Mexico</placekey>
+      </place>
+    </keywords>
+    <accconst>None</accconst>
+    <useconst>None</useconst>
+    <native>Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.1.1.3143</native>
+  </idinfo>
+  <dataqual>
+    <logic>The data was built to check for topological errors and verified that there were none.</logic>
+    <complete>The dataset is considered to be inclusive of every BLM administered wilderness area in New
+      Mexico.</complete>
+    <lineage>
+      <procstep>
+        <procdesc>Shapefile was downloaded from BLM and reprojected from 1983 Albers to Geographic WGS84 for ingest into RGIS.</procdesc>
+        <procdate>20140326</procdate>
+        <proccont>
+          <cntinfo>
+            <cntorgp>
+              <cntorg>Earth Data Analysis Center</cntorg>
+            </cntorgp>
+            <cntpos>Clearinghouse Manager</cntpos>
+            <cntaddr>
+              <addrtype>mailing address</addrtype>
+              <address>MSC01 1110</address>
+              <address>1 University of New Mexico</address>
+              <city>Albuquerque</city>
+              <state>NM</state>
+              <postal>87131-0001</postal>
+              <country>USA</country>
+            </cntaddr>
+            <cntvoice>505-277-3622 ext. 230</cntvoice>
+            <cntfax>505-277-3614</cntfax>
+            <cntemail>clearinghouse@edac.unm.edu</cntemail>
+          </cntinfo>
+        </proccont>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <spdoinfo>
+    <indspref>New Mexico</indspref>
+    <direct>Vector</direct>
+    <ptvctinf>
+      <sdtsterm>
+        <sdtstype>GT-polygon composed of chains</sdtstype>
+        <ptvctcnt>5</ptvctcnt>
+      </sdtsterm>
+    </ptvctinf>
+  </spdoinfo>
+  <spref>
+    <horizsys>
+      <geograph>
+        <latres>8.983152841195215e-009</latres>
+        <longres>8.983152841195215e-009</longres>
+        <geogunit>Decimal degrees</geogunit>
+      </geograph>
+      <geodetic>
+        <horizdn>D WGS 1984</horizdn>
+        <ellips>WGS 1984</ellips>
+        <semiaxis>6378137.0</semiaxis>
+        <denflat>298.257223563</denflat>
+      </geodetic>
+    </horizsys>
+  </spref>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>NLCS_Wilderness_Areas_2014</enttypl>
+        <enttypd>Polygon features depicting the NLCS Wilderness Areas.</enttypd>
+        <enttypds>BLM</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>FID</attrlabl>
+        <attrdef>Internal feature number.</attrdef>
+        <attrdefs>Esri</attrdefs>
+        <attrdomv>
+          <udom>Sequential unique whole numbers that are automatically generated.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Shape</attrlabl>
+        <attrdef>Feature geometry.</attrdef>
+        <attrdefs>ESRI</attrdefs>
+        <attrdomv>
+          <udom>Coordinates defining the features.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>NLCS_ID</attrlabl>
+        <attrdef>NLCS Unique Identifier.  (Logical Attribute:  National Landscape Conservation System  Place Identifier.  The designed primary key that will uniquely identify a single occurrence of the entity.)  The primary key for NLCS will be 10 digits.  The first four will be "NLCS" and the last six digits will be a sequential number.</attrdef>
+        <attrdefs>BLM</attrdefs>
+        <attrdomv>
+          <udom>Not presentable in a domain</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>NLCS_NAME</attrlabl>
+        <attrdef>NLCS Name.  (Logical Attribute:  National Landscape Conservation System Place Name.  The name of a nationally significant designated area with scientific, cultural, educational, ecological and other values.)  The official name of the NLCS area.  It may contain spaces, plus a combination of upper and lowercase alpha characters.</attrdef>
+        <attrdefs>BLM</attrdefs>
+        <attrdomv>
+          <udom>Not presentable in a domain</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>CASEFILE_N</attrlabl>
+        <attrdef>NLCS Name. (Logical Attribute: National Landscape Conservation System Place Name. The name of a nationally significant designated area with scientific, cultural, educational, ecological and other values.) The official name of the NLCS area. It may contain spaces, plus a combination of upper and lowercase alpha characters.
+        </attrdef>
+        <attrdefs>BLM</attrdefs>
+        <attrdomv>
+          <udom>Not presentable in a domain</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>ADMIN_ST</attrlabl>
+        <attrdef>Administrative State Code:  Two letter, upper case abbreviation for the administrative state office.  The current list of values is:  AK, AZ, CA, CO, ES, ID, MT, NM, NV, OR, UT and WY.  In the FBMS Organization Codes, use the second 2 characters (after the LL).  (e.g. LLAK039000).    Attribute Domain Assignment:  DOM_ADMIN_ST   (Logical Attribute: State Alphabetic Code.  An alphabetic abbreviation that represents each of the 50 states of the United States, the District of Columbia, the outlying areas of the United States, and associated areas.  FIPS PUB 5-2.)  An administrative unit that identifies the state or geographic area which has administrative jurisdiction over lands, and cases.  The land for a case may not be physically located in the associated administrative state.  Only those states that are BLM administrative states are in the domain for this entity. Example: Montana is the Administrative State for public lands in the geographic States of Montana, South and North Dakota.</attrdef>
+        <attrdefs>BLM</attrdefs>
+        <attrdomv>
+          <edom>
+            <edomv>AK</edomv>
+            <edomvd>Alaska</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>AZ</edomv>
+            <edomvd>Arizona</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>CA</edomv>
+            <edomvd>California</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>CO</edomv>
+            <edomvd>Colorado</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>ES</edomv>
+            <edomvd>Eastern States</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>ID</edomv>
+            <edomvd>Idaho</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>MT</edomv>
+            <edomvd>Montana</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>NM</edomv>
+            <edomvd>New Mexico</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>NV</edomv>
+            <edomvd>Nevada</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>OR</edomv>
+            <edomvd>Oregon</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>UT</edomv>
+            <edomvd>Utah</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+          <edom>
+            <edomv>WY</edomv>
+            <edomvd>Wyoming</edomvd>
+            <edomvds>BLM</edomvds>
+          </edom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>DESIG_DATE</attrlabl>
+        <attrdef>Designation Date.  (Logical Attribute:  National Landscape Conservation System Place Designation Date.  The date on which a national landscape conservation unit was designated as such through Congress or other authorized body.)  The date shall be formatted as mm/dd/yyyy.  Default:  09/09/9999</attrdef>
+        <attrdefs>BLM</attrdefs>
+        <attrdomv>
+          <udom>Not presentable in a domain</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Shape_area</attrlabl>
+        <attrdef>Area of feature in internal units squared.</attrdef>
+        <attrdefs>Esri</attrdefs>
+        <attrdomv>
+          <udom>Positive real numbers that are automatically generated.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Shape_len</attrlabl>
+        <attrdef>Feature geometry</attrdef>
+        <attrdefs>ESRI</attrdefs>
+        <attrdomv>
+          <udom>Coordinates defining the features</udom>
+        </attrdomv>
+      </attr>
+    </detailed>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>Earth Data Analysis Center</cntorg>
+        </cntorgp>
+        <cntpos>Clearinghouse Manager</cntpos>
+        <cntaddr>
+          <addrtype>mailing and physical address</addrtype>
+          <address>MSC01 1110</address>
+          <address>1 University of New Mexico</address>
+          <city>Albuquerque</city>
+          <state>NM</state>
+          <postal>87131-0001</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>505-277-3622 ext. 230</cntvoice>
+        <cntfax>505-277-3614</cntfax>
+        <cntemail>clearinghouse@edac.unm.edu</cntemail>
+        <hours>0800 - 1700 MT, M-F -7 hours GMT</hours>
+      </cntinfo>
+    </distrib>
+    <resdesc>Digital Orthophotography</resdesc>
+    <distliab>The material on this site is made available as a public service. Maps and data are
+      to be used for reference purposes only and the Earth Data Analysis Center (EDAC),
+      Resource Geographic Information System (RGIS) and The University of New Mexico are not
+      responsible for any inaccuracies herein contained. No responsibility is assumed for
+      damages or other liabilities due to the accuracy, availability, use or misuse of the
+      information herein provided. Unless otherwise indicated in the documentation (metadata)
+      for individual data sets, information on this site is in the public domain and may be
+      copied without permission; citation of the source is appreciated.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>ESRI Shapefile</formname>
+          <transize>.237</transize>
+        </digtinfo>
+        <digtopt>
+          <offoptn>
+            <offmedia>CD-ROM</offmedia>
+            <recfmt>ISO 9660 Mode 1 Level 2 Extensions</recfmt>
+          </offoptn>
+        </digtopt>
+      </digform>
+      <fees>Contact Earth Data Analysis Center for more information. </fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20140304</metd>
+    <metc>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>Earth Data Analysis Center</cntorg>
+        </cntorgp>
+        <cntpos>Clearinghouse Manager</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>MSC01 1110</address>
+          <address>1 University of New Mexico</address>
+          <city>Albuquerque</city>
+          <state>NM</state>
+          <postal>87131-0001</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>505-277-3622 ext. 230</cntvoice>
+      </cntinfo>
+    </metc>
+    <metstdn>Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998</metstdv>
+  </metainfo>
+</metadata>

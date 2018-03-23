@@ -1,0 +1,51 @@
+{
+    "description": "Goodson School, NM, NE Quarter, 1988", 
+    "taxonomy": "geoimage", 
+    "basename": "36103h12", 
+    "dataone_archive": false,
+    "releasedate": "2018-02-12",
+    "is_embargoed":false,
+    "author":"admin",
+    "spatial": {
+        "epsg": 26913, 
+        "bbox": "-103.068012123,36.9349026634,-102.99492913,37.0026489346"
+    }, 
+
+    "sources": [
+        {
+            "mimetype": "application/x-zip-compressed", 
+            "files": [
+                "/geodata/sample_datasets/data/36103h12.tif"
+            ], 
+            "set": "original", 
+            "external": "false", 
+            "extension": "tif"
+        }
+    ], 
+    "services": [
+        "wms", 
+        "wcs"
+    ], 
+    "categories": [{
+        "theme": "GSToRE", 
+        "subtheme": "Files", 
+        "groupname": "General"
+    }], 
+    "apps": [
+        "gstore"
+    ], 
+    "standards": [
+        "FGDC-STD-012-2002", 
+        "ISO-19115:2003", 
+        "ISO-19119"
+    ], 
+    "formats": [
+        "tif"
+    ], 
+    "metadata": {
+        "xml": "/geodata/sample_datasets/metadata/36103h12.tif.xml", 
+        "upgrade": "true", 
+        "standard": "FGDC-STD-012-2002"
+    },
+    "activate": "true"
+}

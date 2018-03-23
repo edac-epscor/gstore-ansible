@@ -1,0 +1,47 @@
+{
+    "orig_epsg": 4326,
+    "description": "Bureau of Land Management Wilderness Areas (2014)",
+    "taxonomy": "file",
+    "basename": "wilderness2014",
+    "dataone_archive": false,
+    "releasedate": "2018-02-12",
+    "is_embargoed":false,
+    "author":"admin",
+    "spatial": {
+        "geomtype": "POLYGON",
+        "records": 5,
+        "epsg": 4326,
+        "features": 5,
+        "bbox": "-108.259526,34.581214,-104.393875,36.359462"
+    },
+    "records": 5,
+    "active": "True",
+    "services": [],
+    "categories": [{
+            "theme": "GSToRE", 
+            "subtheme": "Files", 
+            "groupname": "General"
+        }],
+    "sources": [{
+        "mimetype": "application/x-zip-compressed",
+        "files": ["/geodata/sample_datasets/data/nlcs_wilderness_areas_2014.zip"],
+        "set": "original",
+        "external": "False",
+        "extension": "zip"
+    }],
+    "standards": [
+        "FGDC-STD-001-1998",
+        "ISO-19115:2003",
+        "ISO-19119",
+        "ISO-19110"
+    ],
+    "formats": [
+        "zip"
+    ],
+    "metadata": {
+        "xml": "/geodata/sample_datasets/metadata/nlcs_wilderness_areas_2014.shp.xml",
+        "upgrade": "true",
+        "standard": "FGDC-STD-001-1998"
+    },
+    "apps": ["gstore"]
+}

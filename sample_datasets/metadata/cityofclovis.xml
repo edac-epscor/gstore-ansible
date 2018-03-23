@@ -1,0 +1,115 @@
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>City of Clovis, New Mexico</origin>
+        <pubdate>Unknown</pubdate>
+        <title>C</title>
+        <onlink>http://maps.cityofclovis.org</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>The City of Clovis Maps and Apps Gallery is the place where you can find maps and apps that increase transparency and help you interact with your local government. The maps and apps are organized around city services and the information you need to do business with the City of Clovis on a daily basis.</abstract>
+      <purpose>The general mission of the GIS Program is to support the City of Clovis government with geographic information technology for analysis and decision-making.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <rngdates>
+          <begdate>Unknown</begdate>
+          <enddate>Unknown</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>Publication date</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>Continually</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-103.740253</westbc>
+        <eastbc>-103.042661</eastbc>
+        <northbc>34.954233</northbc>
+        <southbc>34.302597</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Categories</themekt>
+        <themekey>location</themekey>
+      </theme>
+      <theme>
+        <themekt>GCMD Science Keywords</themekt>
+        <themekey>DATA ANALYSIS AND VISUALIZATION</themekey>
+        <themekey>GEOGRAPHIC INFORMATION SYSTEMS</themekey>
+      </theme>
+      <place>
+        <placekt>GNIS</placekt>
+        <placekey>Curry County</placekey>
+        <placekey>Clovis</placekey>
+        <placekey>New Mexico</placekey>
+        <placekey>United States</placekey>
+      </place>
+    </keywords>
+    <accconst>None</accconst>
+    <useconst>None</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>City of Clovis</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing and physical address</addrtype>
+          <address>320 N Connelly St.</address>
+          <address>PO Box 760</address>
+          <city>Clovis</city>
+          <state>NM</state>
+          <postal>88101</postal>
+        </cntaddr>
+        <cntvoice>575-769-9422</cntvoice>
+        <cntemail>GIS@cityofclovis.org</cntemail>
+      </cntinfo>
+    </ptcontac>
+  </idinfo>
+  <spdoinfo>
+    <indspref>Curry County</indspref>
+  </spdoinfo>
+  <metainfo>
+    <metd>20131218</metd>
+    <metc>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>Earth Data Analysis Center</cntorg>
+        </cntorgp>
+        <cntpos>Clearinghouse Manager</cntpos>
+        <cntaddr>
+          <addrtype>mailing and physical address</addrtype>
+          <address>MSC01 1110</address>
+          <address>1 University of New Mexico</address>
+          <city>Albuquerque</city>
+          <state>NM</state>
+          <postal>87131-0001</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>505-277-3622 ext. 230</cntvoice>
+        <cntfax>505-277-3614</cntfax>
+        <cntemail>clearinghouse@edac.unm.edu</cntemail>
+        <hours>0800 - 1700 MT, M-F -7 hours GMT</hours>
+      </cntinfo>
+    </metc>
+    <metstdn>Content Standards for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998, Version 2</metstdv>
+    <mettc>local time</mettc>
+    <metac>None</metac>
+    <metuc>None</metuc>
+    <metsi>
+      <metscs>None</metscs>
+      <metsc>Unclassified</metsc>
+      <metshd>None</metshd>
+    </metsi>
+    <metextns>
+      <onlink>http://www.esri.com/metadata/esriprof80.html</onlink>
+      <metprof>ESRI Metadata Profile</metprof>
+    </metextns>
+  </metainfo>
+</metadata>
