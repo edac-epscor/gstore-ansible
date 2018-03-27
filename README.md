@@ -1,20 +1,22 @@
 ## Standalone GSTORE Deployment
 
 - Expects Ansible 2.4.3.0
-- Expects Ubuntu 14.04 hosts
-
-Ensure you have ssh keypair auth setup with the host\hosts you wish to install on.
-
-Edit group_vars/all with the dbnames and passwords of your choosing.
+- Expects Fully patched Ubuntu 14.04 hosts
 
 
-
-##Multi Server###
-Edit the "hosts" inventory file by changing the IP addresses to the assicated addresses of the target servers.
+__Install Steps__
 
 
-Run the following:
-ansible-playbook -i hosts gstore.yml
+1. Ensure you have ssh keypair auth setup with the host\hosts you wish to install on.
+
+2. Edit group_vars/all with the dbnames and passwords of your choosing.
+
+3. Edit the "hosts" inventory file by changing the IP addresses to the associated addresses of the target server or servers.
+
+
+3. From within the repo directory, run this command: 
+
+   > ./ansible-playbook -i hosts gstore.yml
 
 
 
