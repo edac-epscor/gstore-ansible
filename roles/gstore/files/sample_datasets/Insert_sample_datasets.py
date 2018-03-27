@@ -13,29 +13,19 @@ from osgeo import ogr, osr
 '''
 Generic gstore import script 
 
-
-****LOADS FILE/RASTER OBJECTS ONLY****
-
-Vector/tabular data requires additional processing to convert
-from a file object to a fully featured VECTOR or TABLE object.
-See XXXXXXXXX.py for that process.
-
 '''
 
-# change this to point to the local gstore instance
-# also, change myapp to an app registered in the local instance
+
 INSERT_DATASET_URL = 'http://localhost/gstore_v3/apps/gstore/datasets'
 
-APP_KEY = 'gstore'    
+APP_KEY = 'gstore'
 INSERT_ATTRIBUTES_URL = 'http://localhost/gstore_v3/apps/%(app)s/datasets/%(uuid)s/attributes'
 INSERT_GEOMETRIES_URL = 'http://localhost/gstore_v3/apps/%(app)s/datasets/%(uuid)s/features'
 INSERT_FEATURES_URL = 'http://localhost/gstore_v3/apps/%(app)s/datasets/%(uuid)s/featureattributes'
 UPDATE_DATASET_URL = 'http://localhost/gstore_v3/apps/%(app)s/datasets/%(uuid)s'
 
-#TODO: change the local dir
-# grab the sample datasets from the local dir
+
 json_files = glob.glob('/geodata/sample_datasets/jsons/*.json')
-#json_files = ['/geodata/sample_datasets/jsons/jarosofire2013_14.json']
 
 
 
@@ -53,10 +43,10 @@ for json_file in json_files:
     apps = post_data['apps']
 
     if len(apps) > 1:
-        the_url = INSERT_DATASET_URL % {'app':apps[0]}
+        the_url = INSERT_DATASET_URL % {'app': apps[0]}
         post_data.update({"apps": apps[1:]})
     else:
-        the_url = INSERT_DATASET_URL % {'app':apps[0]}
+        the_url = INSERT_DATASET_URL % {'app': apps[0]}
         post_data.update({"apps": []})
 
     post_data['active'] = 'true'
@@ -72,23 +62,24 @@ for json_file in json_files:
     new_dataset = result.content
     print '\tDATASET INSERTED: ', new_dataset
 
-    # save this uuid, mostly for the vector/table inserts, for 
+    # save this uuid, mostly for the vector/table inserts, for
     # additional processing
     with open(os.path.join('/geodata/sample_datasets/logs/dataset_insert', json_file.split('/')[-1].replace('.json', '_rsp.json')), 'w') as f:
         f.write('{"dataset_uuid": "%s"}' % new_dataset)
 
-    
-    
 
 NODATA = '-9999'
 
 insert_dataset_log = '/geodata/sample_datasets/logs/dataset_insert/wilderness2014_rsp.json'
 shapefile_to_convert = '/geodata/sample_datasets/data/nlcs_wilderness_areas_2014.shp'
 
+
 def epsg_to_sr(epsg):
     sr = osr.SpatialReference()
     sr.ImportFromEPSG(epsg)
     return sr
+
+
 def reproject_geom(geom, in_sr, out_sr):
     geom.AssignSpatialReference(in_sr)
     try:
@@ -96,36 +87,35 @@ def reproject_geom(geom, in_sr, out_sr):
     except:
         print "error"
 
+
 OUTPUT_SR = epsg_to_sr(4326)
 
 print "Convert " + shapefile_to_convert+" to GSToRE vector"
 
-#get the dataset uuid from the insert log
+# get the dataset uuid from the insert log
 with open(insert_dataset_log, 'r') as f:
     dataset_log = json.loads(f.read())
 dataset_uuid = dataset_log['dataset_uuid']
 
-#handle the shapefile
+# handle the shapefile
 shpfile = ogr.Open(shapefile_to_convert)
 layer = shpfile.GetLayer()
 
 
 '''
 build a generic attribute dict
-
-note: if you want a more complete definition, this will not be enough.
 '''
 layer_defs = layer.GetLayerDefn()
 num_fields = layer_defs.GetFieldCount()
 fields = [layer_defs.GetFieldDefn(i).GetNameRef() for i in range(num_fields)]
-attributes = [{'orig_name': layer_defs.GetFieldDefn(i).GetNameRef(), 
-    'name': layer_defs.GetFieldDefn(i).GetNameRef(), 
-    'ogr_type': layer_defs.GetFieldDefn(i).GetType(), 
-    'description': '', 
-    'ogr_width': layer_defs.GetFieldDefn(i).GetWidth(), 
-    'ogr_precision': layer_defs.GetFieldDefn(i).GetPrecision(), 
-    'ogr_justify': layer_defs.GetFieldDefn(i).GetJustify(),
-    'nodata': NODATA} for i in range(num_fields)]
+attributes = [{'orig_name': layer_defs.GetFieldDefn(i).GetNameRef(),
+               'name': layer_defs.GetFieldDefn(i).GetNameRef(),
+               'ogr_type': layer_defs.GetFieldDefn(i).GetType(),
+               'description': '',
+               'ogr_width': layer_defs.GetFieldDefn(i).GetWidth(),
+               'ogr_precision': layer_defs.GetFieldDefn(i).GetPrecision(),
+               'ogr_justify': layer_defs.GetFieldDefn(i).GetJustify(),
+               'nodata': NODATA} for i in range(num_fields)]
 
 attribute_data = {'dataset': dataset_uuid, 'fields': attributes}
 
@@ -146,13 +136,15 @@ for i in xrange(layer.GetFeatureCount()):
             print err
             sys.exit()
 
-    geometries.append({"gid": feature.GetFID(), "geom": geometry.ExportToWkb().encode('hex')})
+    geometries.append(
+        {"gid": feature.GetFID(), "geom": geometry.ExportToWkb().encode('hex')})
 
 '''
 post the attributes and geometries
 '''
 print '\tposting attributes'
-result = requests.post(INSERT_ATTRIBUTES_URL % {'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps(attribute_data))
+result = requests.post(INSERT_ATTRIBUTES_URL % {
+                       'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps(attribute_data))
 if result.status_code != 200:
     print result.status_code, result.content
     sys.exit()
@@ -163,7 +155,8 @@ attributes_rsp = json.loads(result.content)['attributes']
 print '\tposting geometries'
 geometries_rsp = {}
 for geom in geometries:
-    result = requests.post(INSERT_GEOMETRIES_URL % {'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps(geom))
+    result = requests.post(INSERT_GEOMETRIES_URL % {
+                           'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps(geom))
     if result.status_code != 200:
         print result.status_code, result.content
         sys.exit()
@@ -194,7 +187,7 @@ for i in xrange(layer.GetFeatureCount()):
         print 'missing geometry: ', feature_id
         sys.exit()
 
-    #get the shapes info
+    # get the shapes info
     gid = geom['gid']
     fid = geom['fid']
     f_uuid = geom['uuid']
@@ -209,7 +202,7 @@ for i in xrange(layer.GetFeatureCount()):
             sys.exit()
         attr = attr[0]
 
-        #at least try to get the data type right
+        # at least try to get the data type right
         try:
             if not val:
                 val = NODATA
@@ -226,19 +219,18 @@ for i in xrange(layer.GetFeatureCount()):
                 val = NODATA
 
         atts.append({"name": field, "u": str(attr['uuid']), "val": val})
-    
+
     features.append({"uuid": str(f_uuid), "fid": fid, "atts": atts})
 with open(os.path.join('/geodata/sample_datasets/logs/feature_insert', insert_dataset_log.split('/')[-1]).replace('_rsp', ''), 'w') as f:
     f.write(json.dumps({"records": features}, indent=4))
 
 '''
 post the features
-/apps/gstore/datasets/633e1cbd-d36e-491a-b214-ec56c79a3506/featureattributes
-/apps/gstore/datasets/633e1cbd-d36e-491a-b214-ec56c79a3506/featureattributes
 '''
 
 print '\tposting features'
-result = requests.post(INSERT_FEATURES_URL % {'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps({"records": features}))
+result = requests.post(INSERT_FEATURES_URL % {
+                       'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps({"records": features}))
 if result.status_code != 200:
     print result.content
     sys.exit()
@@ -248,7 +240,6 @@ with open(os.path.join('/geodata/sample_datasets/logs/feature_insert', insert_da
 
 '''
 update the dataset from FILE to VECTOR
-
 alternately, the dataset can be added as a vector, but inactive.
 after running this process, UPDATE the dataset to active. the 
 features are transferred between the inactive collection to the
@@ -261,7 +252,8 @@ update_data = {
     "services": ['wms', 'wfs'],
     "features": layer.GetFeatureCount()
 }
-result = requests.post(UPDATE_DATASET_URL % {'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps(update_data))
+result = requests.post(UPDATE_DATASET_URL % {
+                       'app': APP_KEY, 'uuid': dataset_uuid}, data=json.dumps(update_data))
 if result.status_code != 200:
     print ''
     sys.exit()
