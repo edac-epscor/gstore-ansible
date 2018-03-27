@@ -7,8 +7,10 @@
 __Install Steps__
 
 
-1. Ensure you have ssh keypair auth setup with the host\hosts you wish to install on.
-
+1. Setup passwordless sudo using ssh keypairs for the hosts you wish to install on.
+    * Set up keypairs for the user you intend to log into the targets with.
+    * Grant this user sudo on the remote machines.
+    * Allow user to sudo without a passoword. (NOPASSWD:ALL in /etc/sudoers)
 2. Edit group_vars/all with the dbnames and passwords of your choosing.
 
 3. Edit the "hosts" inventory file by changing the IP addresses to the associated addresses of the target server or servers.
