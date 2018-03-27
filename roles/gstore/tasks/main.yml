@@ -250,6 +250,11 @@
 
 - copy: src=sample_datasets dest=/geodata/
 
+
+- name: Folder for vector logging.
+  file: path=/geodata/vectorlogs state=directory recurse=yes owner="www-data" group=www-data 
+
+
 - name: set permissions for python-eggs
   file: path=/var/www/.python-eggs/ state=directory recurse=yes owner="www-data" group=www-data
 
