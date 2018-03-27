@@ -433,3 +433,6 @@
   command: /etc/init.d/apache2 restart
 
 
+
+- name: Insert sample datasets
+  shell: "sudo -i -u {{ sudouser }} /opt/modwsgi/gstore_v3_env/bin/python /geodata/sample_datasets/Insert_sample_datasets.py"
