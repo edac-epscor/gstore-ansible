@@ -2,7 +2,8 @@
 
 gstoreuser: gstore
 gstorepassword: secretpassword
+sudouser: edacadmin
+
+#PLEASE DO NOT CHANGE THESE
 gstoredbname: gstore3
 dataonedbname: dataone
-sudouser: ubuntu
-
