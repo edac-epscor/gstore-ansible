@@ -391,7 +391,10 @@
   easy_install:
     name=paste
     virtualenv=/opt/modwsgi/gstore_v3_env
-
+- name: Install OWSLib
+  easy_install:
+    name=OWSLib
+    virtualenv=/opt/modwsgi/gstore_v3_env
 
 - name: Install numpy
   shell: sudo -- sh -c '. /opt/modwsgi/gstore_v3_env/bin/activate; easy_install numpy'
